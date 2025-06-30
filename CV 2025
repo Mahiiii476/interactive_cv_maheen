@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maheen Islam - Creative Portfolio CV</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #45b7d1;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --neon: #00ffff;
+            --purple: #9b59b6;
+            --orange: #f39c12;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Neural Network Background */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+        }
+
+        .neural-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+        }
+
+        .cv-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Futuristic Header */
+        .header {
+            position: relative;
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1), rgba(69,183,209,0.1));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--purple));
+            border-radius: 30px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; filter: blur(5px); }
+            50% { opacity: 1; filter: blur(0px); }
+        }
+
+        .glitch-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 4em;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--neon), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { filter: drop-shadow(0 0 20px var(--neon)); }
+            to { filter: drop-shadow(0 0 40px var(--primary)); }
+        }
+
+        .title-animated {
+            font-size: 1.4em;
+            margin: 20px 0;
+            opacity: 0;
+            animation: slideInFromRight 1s ease-out 0.5s forwards;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .contact-hologram {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-cube {
+            position: relative;
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .contact-cube::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-cube:hover::before {
+            left: 100%;
+        }
+
+        .contact-cube:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,255,255,0.3);
+            border-color: var(--neon);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .section-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Experience Timeline */
+        .experience-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: var(--neon);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--neon);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .timeline-item:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,255,255,0.2);
+        }
+
+        .job-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--neon);
+            margin-bottom: 8px;
+        }
+
+        .company {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .description {
+            line-height: 1.7;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .description ul {
+            margin-left: 20px;
+        }
+
+        .description li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .description li::marker {
+            color: var(--accent);
+        }
+
+        /* Skills Constellation */
+        .skills-constellation {
+            position: relative;
+            min-height: 400px;
+            padding: 20px;
+        }
+
+        .skill-planet {
+            position: absolute;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: orbit 20s linear infinite;
+        }
+
+        .skill-planet:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 40px rgba(255,107,107,0.5);
+            z-index: 10;
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+
+        .skill-planet:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .skill-planet:nth-child(2) { top: 30%; right: 20%; animation-delay: -2s; }
+        .skill-planet:nth-child(3) { bottom: 30%; left: 30%; animation-delay: -4s; }
+        .skill-planet:nth-child(4) { bottom: 20%; right: 30%; animation-delay: -6s; }
+        .skill-planet:nth-child(5) { top: 50%; left: 50%; animation-delay: -8s; }
+        .skill-planet:nth-child(6) { top: 60%; right: 40%; animation-delay: -10s; }
+
+        /* Holographic Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 3em;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--neon), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .glitch-name {
+                font-size: 2.5em;
+            }
+            
+            .contact-hologram {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .skills-constellation {
+                min-height: 300px;
+            }
+            
+            .skill-planet {
+                position: relative !important;
+                display: inline-block;
+                margin: 10px;
+                animation: none !important;
+            }
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: var(--neon);
+            animation: matrixFall 10s linear infinite;
+        }
+
+        @keyframes matrixFall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle System -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Neural Network Background -->
+    <div class="neural-bg" id="neuralBg"></div>
+    
+    <!-- Matrix Rain -->
+    <div class="matrix-rain" id="matrixRain"></div>
+
+    <div class="cv-container">
+        <!-- Futuristic Header -->
+        <header class="header">
+            <h1 class="glitch-name">MAHEEN ISLAM</h1>
+            <p class="title-animated">◆ DIGITAL ARCHITECT ◆ MARKETING STRATEGIST ◆ WEB INNOVATOR ◆</p>
+            
+            <div class="contact-hologram">
+                <div class="contact-cube">
+                    <span>📧</span> iammaheen98@outlook.com
+                </div>
+                <div class="contact-cube">
+                    <span>🌐</span> linkedin.com/in/maheenislam786
+                </div>
+                <div class="contact-cube">
+                    <span>📱</span> +91-8449431292
+                </div>
+            </div>
+        </header>
+
+        <div class="content-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Experience Section -->
+                <div class="section-card">
+                    <h2 class="section-title">◣ EXPERIENCE MATRIX ◢</h2>
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <h3 class="job-title">⚡ FREELANCE WEB DEVELOPER</h3>
+                            <p class="company">◆ DIGITAL NOMAD ◆</p>
+                            <p class="duration">2022 – PRESENT</p>
+                            <div class="description">
+                                <ul>
+                                    <li>🌍 Architected 15+ international web experiences</li>
+                                    <li>🎯 Active Projects: Rishta Janshu, Safar Restaurant</li>
+                                    <li>💻 Tech Stack: HTML5, CSS3, JavaScript, WordPress</li>
+                                    <li>🚀 Delivered scalable solutions across industries</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3 class="job-title">⚡ ASSISTANT MANAGER</h3>
+                            <p class="company">◆ HILTON ROME ◆</p>
+                            <p class="duration">JAN 2024</p>
+                            <div class="description">
+                                <ul>
+                                    <li>👥 Led 15-member research team</li>
+                                    <li>📊 Optimized operations with Power BI & SQL</li>
+                                    <li>🎯 Enhanced service efficiency metrics</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3 class="job-title">⚡ BUSINESS DEVELOPMENT OFFICER</h3>
+                            <p class="company">◆ EMIRATES NBD ◆</p>
+                            <p class="duration">DEC 2022 – JAN 2024</p>
+                            <div class="description">
+                                <ul>
+                                    <li>📈 Engineered promotional strategies</li>
+                                    <li>🎯 Achieved 100%+ sales targets</li>
+                                    <li>💡 Personalized financial solutions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="section-card">
+                    <h2 class="section-title">◣ IMPACT METRICS ◢</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">WEBSITES BUILT</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">40%</div>
+                            <div class="stat-label">ENGAGEMENT BOOST</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">TEAM MEMBERS LED</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">LANGUAGES</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Skills Constellation -->
+                <div class="section-card">
+                    <h2 class="section-title">◣ SKILLS UNIVERSE ◢</h2>
+                    <div class="skills-constellation">
+                        <div class="skill-planet">HTML5 & CSS3</div>
+                        <div class="skill-planet">JavaScript</div>
+                        <div class="skill-planet">WordPress</div>
+                        <div class="skill-planet">Power BI</div>
+                        <div class="skill-planet">Google Analytics</div>
+                        <div class="skill-planet">Digital Marketing</div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="section-card">
+                    <h2 class="section-title">◣ KNOWLEDGE CORE ◢</h2>
+                    <div class="timeline-item">
+                        <h3 class="job-title">⚡ MSC GLOBAL MARKETING</h3>
+                        <p class="company">◆ ROME BUSINESS SCHOOL ◆</p>
+                        <p class="duration">OCT 2023 – SEP 2024</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3 class="job-title">⚡ BACHELOR OF BUSINESS ADMINISTRATION</h3>
+                        <p class="company">◆ MANIPAL UNIVERSITY JAIPUR ◆</p>
+                        <p class="duration">2019 – 2021</p>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="section-card">
+                    <h2 class="section-title">◣ ACHIEVEMENTS ◢</h2>
+                    <div class="description">
+                        <ul>
+                            <li>🌟 Built matrimonial platform with advanced matching algorithms</li>
+                            <li>🎯 Delivered restaurant websites with integrated reservation systems</li>
+                            <li>📊 Implemented CRM systems improving efficiency by 40%</li>
+                            <li>🌍 Managed international client portfolios across UAE & Netherlands</li>
+                            <li>⚡ Specialized in responsive design and SEO optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab">
+        <span style="font-size: 24px;">⚡</span>
+    </div>
+
+    <script>
+        // Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Neural Network Background
+        function createNeuralNetwork() {
+            const neuralBg = document.getElementById('neuralBg');
+            for (let i = 0; i < 20; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 3 + 's';
+                neuralBg.appendChild(node);
+            }
+        }
+
+        // Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixContainer = document.getElementById('matrixRain');
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            
+            for (let i = 0; i < 20; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDelay = Math.random() * 10 + 's';
+                column.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                
+                let text = '';
+                for (let j = 0; j < 20; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                }
+                column.innerHTML = text;
+                matrixContainer.appendChild(column);
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize effects
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            createNeuralNetwork();
+            createMatrixRain();
+            
+            // Observe all animated elements
+            document.querySelectorAll('.section-card, .timeline-item').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.contact-cube').forEach(cube => {
+            cube.addEventListener('mouseenter', () => {
+                cube.style.transform = 'translateY(-5px) rotateX(15deg)';
+            });
+            
+            cube.addEventListener('mouseleave', () => {
+                cube.style.transform = 'translateY(0) rotateX(0)';
+            });
+        });
+
+        // FAB click effect
+        document.querySelector('.fab').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
